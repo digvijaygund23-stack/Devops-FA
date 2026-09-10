@@ -190,15 +190,3 @@ Take screenshots of the following for your submission document:
 5. **Frontend Web Dashboard**: Browser showing `http://localhost:8081` with the QA badge and successful backend connection response.
 6. **Backend Direct API Response**: Browser or Postman showing `http://localhost:5001/api/status`.
 
----
-
-## 🎤 5-Minute Viva & Presentation Talking Points
-
-1. **What is Infrastructure as Code (IaC)?**
-   - IaC allows provisioning and managing computational resources (networks, servers, containers) using machine-readable definition files rather than manual interactive configuration.
-2. **How does this implementation achieve multi-environment without duplicate code?**
-   - We separate **logic** (`main.tf`) from **configuration** (`.tfvars`). By passing `-var-file="environments/<env>.tfvars"`, Terraform dynamically injects environment-specific ports, names, network IDs, and environment variables.
-3. **How do the two containers communicate?**
-   - They reside on a dedicated user-defined Docker bridge network (`app_network_${env}`). The frontend Nginx container communicates with the backend container via Docker's embedded DNS using the container alias `backend-api:5000`.
-4. **Why use .gitignore with Terraform?**
-   - `.tfstate` files can contain sensitive configuration data and resource IDs. They should be stored in a secure remote backend (e.g. Terraform Cloud or AWS S3), never committed to public Git repositories.
